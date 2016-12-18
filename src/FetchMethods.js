@@ -7,7 +7,7 @@ Vue.use(VueAxios, axios)
 export default {
 
   fetchFollowers (user) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       resolve(
         Vue.axios.get(`https://api.github.com/users/${user}/followers`).then(followersResponse => {
           return followersResponse.data.map(follower => {
