@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Stats from 'src/components/Stats'
 
 // Inspect the generated HTML after a state update
-it('updates the rendered message when vm.message updates', done => {
+it('updates the rendered username when vm.username updates', done => {
   const vm = new Vue(Stats).$mount()
   vm.username = 'foo'
   // wait a "tick" after state change before asserting DOM updates

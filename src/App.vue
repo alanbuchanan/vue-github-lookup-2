@@ -21,6 +21,7 @@ import VueAxios from 'vue-axios'
 import _ from 'lodash'
 import UserForm from './components/UserForm'
 import Stats from './components/Stats'
+import FetchMethods from './FetchMethods'
 
 Vue.use(VueAxios, axios)
 
@@ -39,7 +40,8 @@ export default {
       avatar: '',
       followers: [],
       faveLang: '',
-      urlBase: 'https://api.github.com/users'
+      urlBase: 'https://api.github.com/users',
+      userData: []
     }
   },
 
@@ -55,12 +57,16 @@ export default {
     fetchUser (api) {
       Vue.axios.get(api).then((response) => {
         const { data } = response
+        this.userData = data
 
         this.inputValue = ''
-        this.username = data.login
-        this.avatar = data.avatar_url
+        this.username = this.userData.login
+        this.avatar = this.userData.avatar_url
 
-        this.fetchFollowers()
+        FetchMethods.fetchFollowers(this.username).then((followers) => {
+          this.followers = followers
+        })
+
         this.fetchFaveLang()
       }).catch(error => {
         console.warn('ERROR:', error)
