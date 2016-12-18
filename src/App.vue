@@ -56,8 +56,7 @@ export default {
 
     fetchUser (api) {
       Vue.axios.get(api).then((response) => {
-        const { data } = response
-        this.userData = data
+        this.userData = response.data
 
         this.inputValue = ''
         this.username = this.userData.login
