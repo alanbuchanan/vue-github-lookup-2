@@ -1,12 +1,13 @@
 <template>
   <form @submit.prevent="handleSubmit">
     <input
+      class="input"
       :value="inputValue"
       @input="updateValue($event.target.value)"
       type="text"
       placeholder="Enter a GitHub username..."
     >
-    <button>Go!</button>
+    <button class="button">Go!</button>
   </form>
 </template>
 

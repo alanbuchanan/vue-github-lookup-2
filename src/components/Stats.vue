@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h1 v-if="username" v-text="username"></h1>
+    <h1 class="username" v-if="username">{{username}}</h1>
     <img v-if="avatar" :src="avatar" class="avatar">
-    <h2 v-if="faveLang">😍 Favourite Language: {{faveLang}} 😍</h2>
+    <h2 v-if="faveLang">Favourite Language: {{faveLang}}</h2>
     <h3 v-if="followers.length > 0">Followers ({{followers.length}}):</h3>
     <ul v-if="followers.length > 0">
       <li v-for="follower in followers">
@@ -14,6 +14,7 @@
 
 <script>
   export default {
+    name: 'stats',
     props: [
       'username',
       'avatar',
