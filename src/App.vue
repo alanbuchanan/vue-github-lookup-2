@@ -4,13 +4,13 @@
       v-model="inputValue"
       @go="submit"
       :input-value="inputValue"
-    />
+    ></user-form>
     <stats
       :username="username"
       :avatar="avatar"
-      :faveLang="faveLang"
+      :fave-lang="faveLang"
       :followers="followers"
-    />
+    ></stats>
   </div>
 </template>
 
