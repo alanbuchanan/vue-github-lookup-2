@@ -16,6 +16,18 @@ export default {
         })
       )
     })
+  },
+
+  fetchLanguages (user) {
+    return new Promise((resolve, reject) => {
+      resolve(
+        Vue.axios.get(`https://api.github.com/users/${user}/repos`).then(reposResponse => {
+          return reposResponse.data.map(repo => {
+            return repo.language
+          })
+        })
+      )
+    })
   }
 
 }

@@ -67,35 +67,16 @@ export default {
           this.followers = followers
         })
 
-        this.fetchFaveLang()
+        FetchMethods.fetchLanguages(this.username).then(languages => {
+          const faveLang = _.chain(languages).filter(Boolean).countBy().toPairs().maxBy(_.last).head().value()
+          this.faveLang = faveLang || ''
+        })
+
       }).catch(error => {
         console.warn('ERROR:', error)
       })
     },
 
-    fetchFollowers () {
-      Vue.axios.get(`${this.urlBase}/${this.username}/followers`).then(followersResponse => {
-        this.followers = followersResponse.data.map(follower => {
-          return follower.login
-        })
-      })
-    },
-
-    fetchFaveLang () {
-      Vue.axios.get(`${this.urlBase}/${this.username}/repos`).then(reposResponse => {
-        const langs = reposResponse.data.map(repo => {
-          return repo.language
-        })
-
-        // Get most commonly occurring string from array
-        const faveLang = _.chain(langs).countBy().toPairs().maxBy(_.last).head().value()
-        if (faveLang !== 'null') {
-          this.faveLang = faveLang
-        } else {
-          this.faveLang = ''
-        }
-      })
-    }
   }
 }
 </script>
